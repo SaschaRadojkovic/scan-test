@@ -1,27 +1,22 @@
-"use client";
-
-import { useState, useEffect } from "react";
-// copied from https://www.delftstack.com/howto/react/get-window-width-react/
-function getWindowDimensions() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  return {
-    width,
-    height,
-  };
-}
+import { useEffect, useState } from "react";
+//https://dev.to/adrien/creating-a-custom-react-hook-to-get-the-window-s-dimensions-in-next-js-135k
 
 export default function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
+  const [windowDimensions, setWindowDimensions] = useState({
+    width: undefined,
+    height: undefined,
+  });
   useEffect(() => {
     function handleResize() {
-      setWindowDimensions(getWindowDimensions());
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
     }
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, []); // Empty array ensures that effect is only run on mount
 
   return windowDimensions;
 }
