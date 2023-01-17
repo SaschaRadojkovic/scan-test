@@ -2,12 +2,14 @@
 import { Inter } from "@next/font/google";
 import Scanner from "@/components/scanner";
 import { useLayoutEffect, useRef, useState } from "react";
+import useWindowDimensions from "./WindowDimensions";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function BarcodeScanner() {
   const [scanning, setScanning] = useState(false);
   const [results, setResults] = useState([]);
+  const { width, height } = useWindowDimensions();
   const scannerRef = useRef(null);
 
   function onDetected(result) {
@@ -17,7 +19,7 @@ export default function BarcodeScanner() {
   }
   useLayoutEffect(() => {
     setScanning(true);
-  });
+  }, []);
 
   return (
     <>
@@ -53,7 +55,11 @@ export default function BarcodeScanner() {
               height="480"
             />
             {scanning ? (
-              <Scanner scannerRef={scannerRef} onDetected={onDetected} />
+              <Scanner
+                constraints={{ width, height: height / 2 }}
+                scannerRef={scannerRef}
+                onDetected={onDetected}
+              />
             ) : null}
           </div>
         )}
