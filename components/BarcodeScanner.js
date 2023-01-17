@@ -1,12 +1,12 @@
 "use client";
 import { Inter } from "@next/font/google";
 import Scanner from "@/components/scanner";
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function BarcodeScanner() {
-  const [scanning, setScanning] = useState(true);
+  const [scanning, setScanning] = useState(false);
   const [results, setResults] = useState([]);
   const scannerRef = useRef(null);
 
@@ -15,6 +15,9 @@ export default function BarcodeScanner() {
     setResults([...results, result]);
     setScanning(false);
   }
+  useLayoutEffect(() => {
+    setScanning(true);
+  });
 
   return (
     <>
