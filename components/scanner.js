@@ -141,17 +141,7 @@ const Scanner = ({
       Quagga.offProcessed(handleProcessed);
       Quagga.stop();
     };
-  }, [
-    cameraId,
-    onDetected,
-    onScannerReady,
-    scannerRef,
-    errorCheck,
-    constraints,
-    locator,
-    decoders,
-    locate,
-  ]);
+  });
   return null;
 };
 
