@@ -103,55 +103,58 @@ const Scanner = ({
     }
   };
 
-  useLayoutEffect(() => {
-    Quagga.init(
-      {
-        inputStream: {
-          type: "LiveStream",
-          constraints: {
-            ...constraints,
-            ...(cameraId && { deviceId: cameraId }),
-            ...(!cameraId && { facingMode }),
+  useLayoutEffect(
+    ({ facingMode, numOfWorkers }) => {
+      Quagga.init(
+        {
+          inputStream: {
+            type: "LiveStream",
+            constraints: {
+              ...constraints,
+              ...(cameraId && { deviceId: cameraId }),
+              ...(!cameraId && { facingMode }),
+            },
+            target: scannerRef.current,
           },
-          target: scannerRef.current,
+          locator,
+          numOfWorkers,
+          decoder: { readers: decoders },
+          locate,
         },
-        locator,
-        numOfWorkers,
-        decoder: { readers: decoders },
-        locate,
-      },
-      (err) => {
-        Quagga.onProcessed(handleProcessed);
+        (err) => {
+          Quagga.onProcessed(handleProcessed);
 
-        if (err) {
-          return console.log("Error starting Quagga:", err);
-        }
-        if (scannerRef && scannerRef.current) {
-          console.log("brokol", scannerRef);
-          Quagga.start();
-          if (onScannerReady) {
-            onScannerReady();
+          if (err) {
+            return console.log("Error starting Quagga:", err);
+          }
+          if (scannerRef && scannerRef.current) {
+            console.log("brokol", scannerRef);
+            Quagga.start();
+            if (onScannerReady) {
+              onScannerReady();
+            }
           }
         }
-      }
-    );
-    Quagga.onDetected(errorCheck);
-    return () => {
-      Quagga.offDetected(errorCheck);
-      Quagga.offProcessed(handleProcessed);
-      Quagga.stop();
-    };
-  }, [
-    cameraId,
-    onDetected,
-    onScannerReady,
-    scannerRef,
-    errorCheck,
-    constraints,
-    locator,
-    decoders,
-    locate,
-  ]);
+      );
+      Quagga.onDetected(errorCheck);
+      return () => {
+        Quagga.offDetected(errorCheck);
+        Quagga.offProcessed(handleProcessed);
+        Quagga.stop();
+      };
+    },
+    [
+      cameraId,
+      onDetected,
+      onScannerReady,
+      scannerRef,
+      errorCheck,
+      constraints,
+      locator,
+      decoders,
+      locate,
+    ]
+  );
   return null;
 };
 
