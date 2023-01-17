@@ -2,7 +2,10 @@
 import { Inter } from "@next/font/google";
 import Scanner from "@/components/scanner";
 import { useLayoutEffect, useRef, useState } from "react";
-import useWindowDimensions from "./WindowDimensions";
+import dynamic from "next/dynamic";
+const useWindowDimensions = dynamic(() =>
+  import("./WindowDimensions", { ssr: false })
+);
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,6 +14,7 @@ export default function BarcodeScanner() {
   const [results, setResults] = useState([]);
   const { width, height } = useWindowDimensions();
   const scannerRef = useRef(null);
+  console.log("wh", width, height);
 
   function onDetected(result) {
     console.log(result);

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 // copied from https://www.delftstack.com/howto/react/get-window-width-react/
 function getWindowDimensions() {
