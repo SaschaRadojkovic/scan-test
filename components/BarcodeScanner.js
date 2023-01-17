@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function BarcodeScanner() {
   const [scanning, setScanning] = useState(false);
   const [results, setResults] = useState([]);
-  const { width, height } = useWindowDimensions();
+  //   const { width, height } = useWindowDimensions();
   const scannerRef = useRef(null);
   console.log("wh", width, height);
 
@@ -60,7 +60,7 @@ export default function BarcodeScanner() {
             />
             {scanning ? (
               <Scanner
-                constraints={{ width, height: height / 2 }}
+                constraints={{ width: 300, height: 300 }}
                 scannerRef={scannerRef}
                 onDetected={onDetected}
               />
