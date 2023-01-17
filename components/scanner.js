@@ -37,7 +37,7 @@ const Scanner = ({
   scannerRef,
   onScannerReady,
   cameraId,
-  facingMode,
+  facingMode = "environment",
   constraints = defaultConstraints,
   locator = defaultLocatorSettings,
   numOfWorkers = 0,
