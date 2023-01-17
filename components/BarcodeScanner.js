@@ -1,7 +1,7 @@
 "use client";
 import { Inter } from "@next/font/google";
 import Scanner from "@/components/scanner";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 const useWindowDimensions = dynamic(() =>
   import("./WindowDimensions", { ssr: false })
@@ -21,7 +21,7 @@ export default function BarcodeScanner() {
     setResults([...results, result]);
     setScanning(false);
   }
-  useLayoutEffect(() => {
+  useEffect(() => {
     setScanning(true);
   }, []);
 
