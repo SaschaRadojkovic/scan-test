@@ -3,9 +3,6 @@ import { Inter } from "@next/font/google";
 import Scanner from "@/components/scanner";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-// const useWindowDimensions = dynamic(() =>
-//   import("./WindowDimensions", { ssr: false })
-// );
 
 const inter = Inter({ subsets: ["latin"] });
 
