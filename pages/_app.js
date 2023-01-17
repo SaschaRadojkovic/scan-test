@@ -1,6 +1,7 @@
 // import '@/styles/globals.css'
 
-import NoSSR from "react-no-ssr";
+import dynamic from "next/dynamic";
+const NoSSR = dynamic(() => import("react-no-ssr", { ssr: false }));
 
 export default function App({ Component, pageProps }) {
   return (
