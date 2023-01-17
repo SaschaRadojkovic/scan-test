@@ -40,7 +40,7 @@ const Scanner = ({
   facingMode,
   constraints = defaultConstraints,
   locator = defaultLocatorSettings,
-  numOfWorkers = navigator.hardwareConcurrency || 0,
+  numOfWorkers = 0,
   decoders = defaultDecoders,
   locate = true,
 }) => {
