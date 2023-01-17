@@ -37,7 +37,7 @@ const Scanner = ({
   scannerRef,
   onScannerReady,
   cameraId,
-  facingMode = "environment",
+  facingMode = "user",
   constraints = defaultConstraints,
   locator = defaultLocatorSettings,
   numOfWorkers = 0,
@@ -122,12 +122,13 @@ const Scanner = ({
       },
       (err) => {
         Quagga.onProcessed(handleProcessed);
+        console.log("quagga", Quagga);
 
         if (err) {
           return console.log("Error starting Quagga:", err);
         }
         if (scannerRef && scannerRef.current) {
-          console.log("brokol", scannerRef);
+          console.log("brokoli", scannerRef);
           Quagga.start();
           if (onScannerReady) {
             onScannerReady();
