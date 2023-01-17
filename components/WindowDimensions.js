@@ -9,8 +9,8 @@ export default function useWindowDimensions() {
   useEffect(() => {
     function handleResize() {
       setWindowDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: window.innerWidth || 300,
+        height: window.innerHeight || 300,
       });
     }
     handleResize();
